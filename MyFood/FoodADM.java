@@ -80,14 +80,16 @@ public class FoodADM {
 	
 	private void delete() {
 		Scanner in = new Scanner(System.in);
+		FoodDTO f = new FoodDTO();
 		System.out.println("삭제할 음식의 번호를 입력하세요.");
 		String delFood = in.nextLine();
+		f.setFoodNum(delFood);
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "11111111");
 			String sql = "delete from foodlist where foodnum = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, delFood);
+			pstmt.setString(1, f.getFoodNum());
 			int result = pstmt.executeUpdate();
 			if(result == 0) {
 				conn.rollback();
