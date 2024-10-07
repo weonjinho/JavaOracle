@@ -3,6 +3,7 @@ package MyFood;
 public class FoodDTO {
 	private String foodNum = null;
 	private String foodName = null;
+	private String modName = null;
 	
 	public String getFoodNum() {
 		return foodNum;
@@ -17,5 +18,11 @@ public class FoodDTO {
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
 	}
-	
+	public String getModName() {
+		return modName;
+	}
+
+	public void setModName(String modName) {
+		this.modName = modName;
+	}
 }

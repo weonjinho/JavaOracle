@@ -109,20 +109,27 @@ public class FoodADM {
 
 	private void modify() {
 		Scanner in = new Scanner(System.in);
+		FoodDTO f = new FoodDTO();
 		System.out.println("수정할 음식의 이름을 입력하세요.");
 		String modName = in.nextLine();
+		f.setModName(modName);
 		System.out.println("수정 후 음식의 이름을 입력하세요.");
 		String newName = in.nextLine();
+		f.setFoodName(newName);
 		System.out.println("수정 후 음식의 변호를 입력하세요.");
 		String newNum = in.nextLine();
+		f.setFoodNum(newNum);
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "11111111");
 			String sql = "update foodlist set foodname = ?, foodnum = ? where foodname = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, newName);
-			pstmt.setString(2, newNum);
-			pstmt.setString(3, modName);
+//			pstmt.setString(1, newName);
+//			pstmt.setString(2, newNum);
+//			pstmt.setString(3, modName);
+			pstmt.setString(1, f.getFoodName());
+			pstmt.setString(2, f.getFoodNum());
+			pstmt.setString(3, f.getModName());
 			int result = pstmt.executeUpdate();
 			if(result == 0) {
 				conn.rollback();
